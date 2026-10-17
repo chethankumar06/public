@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CampusHub – Register and Login</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<button class="theme" id="themeBtn" type="button" aria-label="Switch colour theme">Theme</button>
+<div class="shell">
+  <aside class="side">
+    <div>
+      <div class="brand">CampusHub</div>
+      <h2>Your library and campus store, one account.</h2>
+      <p>Borrow books, buy notes and calculators, and track every order and due date.</p>
+    </div>
+    <div class="shelf" id="shelf" aria-hidden="true"></div>
+  </aside>
+
+  <main class="main">
+    <div class="card">
+      <div class="steps" role="tablist" id="steps">
+        <button class="step" role="tab" id="tab-register" aria-selected="true">1. Register</button>
+        <button class="step" role="tab" id="tab-login" aria-selected="false">2. Login</button>
+      </div>
+
+      <!-- REGISTER -->
+      <section id="registerView">
+        <h1>Create your account</h1>
+        <p class="sub">Use your college details so the library can link loans to you.</p>
+        <form id="regForm" novalidate>
+          <div class="f"><label for="rName">Full name</label><input id="rName" autocomplete="name"><div class="err" data-for="rName"></div></div>
+          <div class="row">
+            <div class="f"><label for="rSid">Student ID</label><input id="rSid" autocomplete="off" placeholder="e.g. 22CS1045"><div class="err" data-for="rSid"></div></div>
+            <div class="f"><label for="rEmail">College email</label><input id="rEmail" type="email" autocomplete="email"><div class="err" data-for="rEmail"></div></div>
+          </div>
+          <div class="row">
+            <div class="f"><label for="rDept">Department</label>
+              <select id="rDept"><option value="">Select</option><option>Computer Science</option><option>Electronics</option><option>Mechanical</option><option>Civil</option><option>Electrical</option><option>Commerce</option><option>Arts and Science</option></select>
+              <div class="err" data-for="rDept"></div></div>
+            <div class="f"><label for="rSem">Semester</label>
+              <select id="rSem"><option value="">Select</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select>
+              <div class="err" data-for="rSem"></div></div>
+          </div>
+          <div class="f"><label for="rPw">Password</label>
+            <div class="pw"><input id="rPw" type="password" autocomplete="new-password"><button type="button" data-toggle="rPw">Show</button></div>
+            <div class="meter"><b id="meterBar"></b></div>
+            <div class="hint" id="meterTxt">At least 8 characters with a letter and a number.</div>
+            <div class="err" data-for="rPw"></div></div>
+          <div class="f"><label for="rPw2">Confirm password</label>
+            <div class="pw"><input id="rPw2" type="password" autocomplete="new-password"><button type="button" data-toggle="rPw2">Show</button></div>
+            <div class="err" data-for="rPw2"></div></div>
+          <button class="btn" type="submit">Create account</button>
+        </form>
+        <p class="alt">Already registered? <button class="link" type="button" data-go="login">Log in</button></p>
+      </section>
+
+      <!-- LOGIN -->
+      <section id="loginView" class="hidden">
+        <h1>Welcome back</h1>
+        <p class="sub">Log in with your email or student ID.</p>
+        <div id="loginBanner" class="banner hidden" role="status"></div>
+        <form id="logForm" novalidate>
+          <div class="f"><label for="lId">Email or student ID</label><input id="lId" autocomplete="username"><div class="err" data-for="lId"></div></div>
+          <div class="f"><label for="lPw">Password</label>
+            <div class="pw"><input id="lPw" type="password" autocomplete="current-password"><button type="button" data-toggle="lPw">Show</button></div>
+            <div class="err" data-for="lPw"></div></div>
+          <button class="btn" type="submit">Log in</button>
+        </form>
+        <p class="alt">New here? <button class="link" type="button" data-go="register">Create an account</button></p>
+      </section>
+
+      <!-- DASHBOARD -->
+      <section id="dashView" class="hidden">
+        <p class="prof" id="dProfile"></p>
+        <h1 id="dHello"></h1>
+        <p class="sub">Choose Buy or Rent on each item. Prices are in rupees. Late returns cost ₹5 per day.</p>
+        <div id="adminBox" class="tile hidden" style="margin:14px 0"><h3>Add an item available on campus</h3><p>Only the admin (first registered account) sees this. Leave rent price empty if the item cannot be rented. The 14 and 30 day rent prices are worked out from the 7 day price.</p>
+<form id="addForm" novalidate style="margin-top:12px"><div class="row"><div class="f"><label for="aCat">Category</label><select id="aCat"><option value="B">Books</option><option value="N">Notes</option><option value="C">Calculators</option><option value="S">Stationery</option><option value="L">Lab and project</option><option value="E">Essentials</option></select></div><div class="f"><label for="aName">Name</label><input id="aName"></div></div>
+<div class="row"><div class="f"><label for="aDet">Details (edition, shelf, subject)</label><input id="aDet"></div><div class="f"><label for="aPrice">Buy price (₹)</label><input id="aPrice" type="number" min="0"></div></div>
+<div class="row"><div class="f"><label for="aRent">Rent price per 7 days (₹, optional)</label><input id="aRent" type="number" min="0"></div><div class="f"><label for="aStock">Quantity in stock</label><input id="aStock" type="number" min="0"></div></div>
+<div class="err" id="aErr"></div><button class="btn" type="submit" style="max-width:200px">Add item</button></form></div>
+        <div class="shop-top"><input id="sQ" type="search" placeholder="Search books, notes, calculators" aria-label="Search items" style="max-width:320px"><div class="tabs" id="chips"></div></div>
+        <div class="layout"><div id="shopMain"></div><aside class="cart" id="cartBox" aria-live="polite"></aside></div>
+        <button class="btn" id="logoutBtn" type="button">Log out</button>
+      </section>
+    </div>
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
